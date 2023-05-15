@@ -1,4 +1,4 @@
-import db_sqlite3
+
 from pathlib import Path
 import tkinter as tk
 # Explicit imports to satisfy Flake8
@@ -8,7 +8,7 @@ import subprocess
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\assets\frame2")
+ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame2")
 
 def open_home_interface():
     window.withdraw()  # Hide the current interface

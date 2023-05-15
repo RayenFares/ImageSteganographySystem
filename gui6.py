@@ -8,7 +8,7 @@ import subprocess
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\build\assets\frame6")
+ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame6")
 
 
 def open_login_interface():

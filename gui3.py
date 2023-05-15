@@ -8,7 +8,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\assets\frame3")
+ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame3")
 
 
 def relative_to_assets(path: str) -> Path:
