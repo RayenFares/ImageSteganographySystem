@@ -4,11 +4,51 @@ import tkinter as tk
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess
-
+import sqlite3
 
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame2")
+#database creation
+# Connect to the database
+connection = sqlite3.connect('database.db')
+# Create a cursor object to execute SQL statements
+cursor = connection.cursor()
+
+# Create a table (if it doesn't exist)
+cursor.execute('''CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    password TEXT
+)''')
+
+#Registration for new user
+def register():
+    username = entry_1.get()
+    password = entry_2.get()
+
+    canvas.itemconfig(error_text, text="")  # Clear previous error messages
+    entry_1.delete(0, tk.END)
+    entry_2.delete(0, tk.END)
+
+    # Check if the username already exists
+    cursor.execute("SELECT COUNT(*) FROM users WHERE username=?", (username,))
+    result = cursor.fetchone()
+    if result[0] > 0:
+        canvas.itemconfig(error_text, text="Username already exists. Please choose a different username.")
+        return
+
+    # Check the length of the password
+    if len(password) <= 8:
+        canvas.itemconfig(error_text, text="Password should be more than 8 characters long.")
+        return
+
+    # Insert the new user into the database
+    cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+    connection.commit()
+    canvas.itemconfig(success_text, text="Registration successful.")
+
+    open_login_interface()
 
 def open_home_interface():
     window.withdraw()  # Hide the current interface
@@ -50,6 +90,22 @@ image_1 = canvas.create_image(
     474.0,
     image=image_image_1
 )
+#error text defintion
+# Create the error text widget
+error_text = canvas.create_text(
+    272.0,
+    400.0,
+    anchor="nw",
+    fill="#FF0000",
+    font=("Poppins Regular", 12 * -1)
+)
+success_text = canvas.create_text(
+    272.0,
+    400.0,
+    anchor="nw",
+    fill="#00FF00",
+    font=("Poppins Regular", 12 * -1)
+)
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
@@ -57,7 +113,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command= open_login_interface,
+    command= register,
     relief="flat"
 )
 button_1.place(

@@ -1,15 +1,18 @@
 
-
 from pathlib import Path
 import tkinter as tk
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess
+import sqlite3
+
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame0")
-
+# Connect to the database
+connection = sqlite3.connect('database.db')
+cursor = connection.cursor()
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -19,6 +22,27 @@ def open_home_interface():
     # ... Save any necessary data ...
     subprocess.Popen(["python", "gui3.py"])
     window.destroy()  # Close the current interface
+
+#Authentication
+def authenticate():
+    username = entry_1.get()
+    password = entry_2.get()
+
+    canvas.itemconfig(error_text, text="")  # Clear previous error messages
+    entry_1.delete(0, tk.END)
+    entry_2.delete(0, tk.END)
+
+    # Query the database to check if the credentials are correct
+    cursor.execute("SELECT COUNT(*) FROM users WHERE username=? AND password=?", (username, password))
+    result = cursor.fetchone()
+    count = result[0]
+
+    if count > 0:
+        # Authentication successful, open the home page
+        open_home_interface()
+    else:
+        # Authentication failed, show an error message
+        canvas.itemconfig(error_text, text="Incorrect username or password")
 
 window = tk.Tk()
 
@@ -36,6 +60,20 @@ canvas = Canvas(
     relief = "ridge"
 )
 
+'''
+# Retrieve the users and their passwords from the database
+cursor.execute("SELECT username, password FROM users")
+users = cursor.fetchall()
+for user in users:
+    username, password = user
+    print("Username:", username)
+    print("Password:", password)
+    print()
+#delete all of the users
+cursor.execute("DELETE FROM users")
+connection.commit()
+'''
+
 canvas.place(x = 0, y = 0)
 image_image_1 = PhotoImage(
     file=relative_to_assets("image_1.png"))
@@ -45,13 +83,22 @@ image_1 = canvas.create_image(
     image=image_image_1
 )
 
+# Create the error text widget
+error_text = canvas.create_text(
+    320.0,
+    380.0,
+    anchor="nw",
+    fill="#FF0000",
+    font=("Poppins Regular", 12 * -1)
+)
+
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
 button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command= open_home_interface,
+    command= authenticate,
     relief="flat"
 )
 button_1.place(
