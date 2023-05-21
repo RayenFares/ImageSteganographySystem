@@ -23,6 +23,12 @@ def open_home_interface():
     subprocess.Popen(["python", "gui3.py"])
     window.destroy()  # Close the current interface
 
+def open_register_interface():
+    window.withdraw()  # Hide the current interface
+    # ... Save any necessary data ...
+    subprocess.Popen(["python", "gui2.py"])
+    window.destroy()  # Close the current interface
+
 #Authentication
 def authenticate():
     username = entry_1.get()
@@ -105,6 +111,22 @@ button_1.place(
     x=300.0000000000001,
     y=328.0,
     width=256.0,
+    height=34.0
+)
+#We Realized that we need a register button in the login page
+button_image = PhotoImage(
+    file=relative_to_assets("Button.png"))
+button = tk.Button(
+    image=button_image,
+    borderwidth=0,
+    highlightthickness=0,
+    command= open_register_interface,
+    relief="flat"
+)
+button.place(
+    x=745.0,
+    y=30.0,
+    width=91.0,
     height=34.0
 )
 

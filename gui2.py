@@ -215,7 +215,7 @@ button_2 = tk.Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command= open_home_interface,
+    command= open_login_interface,
     relief="flat"
 )
 button_2.place(
