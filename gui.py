@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess
 import sqlite3
+import bcrypt
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -34,12 +35,13 @@ def authenticate():
     username = entry_1.get()
     password = entry_2.get()
 
+    hashed_password = bcrypt.hashpw ( password.encode (), bcrypt.gensalt () )
     canvas.itemconfig(error_text, text="")  # Clear previous error messages
     entry_1.delete(0, tk.END)
     entry_2.delete(0, tk.END)
 
     # Query the database to check if the credentials are correct
-    cursor.execute("SELECT COUNT(*) FROM users WHERE username=? AND password=?", (username, password))
+    cursor.execute("SELECT COUNT(*) FROM users WHERE username=? AND password=?", (username, hashed_password))
     result = cursor.fetchone()
     count = result[0]
 

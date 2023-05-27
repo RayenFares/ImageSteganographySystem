@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess
 import sqlite3
+import bcrypt
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -31,6 +32,8 @@ def register():
     entry_1.delete(0, tk.END)
     entry_2.delete(0, tk.END)
 
+    # Encrypt the password
+    hashed_password = bcrypt.hashpw ( password.encode (), bcrypt.gensalt () )
     # Check if the username already exists
     cursor.execute("SELECT COUNT(*) FROM users WHERE username=?", (username,))
     result = cursor.fetchone()
@@ -44,7 +47,7 @@ def register():
         return
 
     # Insert the new user into the database
-    cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+    cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
     connection.commit()
     canvas.itemconfig(success_text, text="Registration successful.")
 
