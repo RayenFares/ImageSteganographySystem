@@ -46,9 +46,9 @@ def register():
         canvas.itemconfig(error_text, text="Password should be more than 8 characters long.")
         return
 
-    # Check if the password contains only alphanumeric characters and symbols
-    if not re.match ( r'^[a-zA-Z0-9\S]+$', password ) :
-        canvas.itemconfig ( error_text, text = "Password should be composed of alphanumeric and other symbols." )
+    # Check if the password meets the requirements
+    if not re.match ( r"^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^&*()_+=\-[\]{};':\"\\|,.<>/?])", password ) :
+        canvas.itemconfig ( error_text, text = "Password should contain at least one letter, one digit, and one special symbol." )
         return
 
     # Insert the new user into the database
