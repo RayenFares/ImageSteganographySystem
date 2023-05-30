@@ -1,4 +1,3 @@
-
 from pathlib import Path
 import tkinter as tk
 # Explicit imports to satisfy Flake8
@@ -44,6 +43,11 @@ def register():
     # Check the length of the password
     if len(password) <= 8:
         canvas.itemconfig(error_text, text="Password should be more than 8 characters long.")
+        return
+
+    # Check if the password contains only alphanumeric characters and symbols
+    if not re.match ( r'^[a-zA-Z0-9\S]+$', password ) :
+        canvas.itemconfig ( error_text, text = "Password should be composed of alphanumeric and other symbols." )
         return
 
     # Insert the new user into the database
