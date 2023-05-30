@@ -67,6 +67,46 @@ def decode_lsb(image_path):
             for k in range(image_array.shape[2]):
                 binary_message += str(image_array[i, j, k] & 1)
 
+    # Find the index of the null character in the binary message
+    null_index = binary_message.find('00000000')
+
+    # Retrieve the binary message before the null character
+    message_binary = binary_message[:null_index]
+
+    # Split the binary message into 8-bit chunks and convert each chunk to a character using the chr function
+    message = ''
+    for i in range(0, len(message_binary), 8):
+        byte = message_binary[i:i+8]
+        message += chr(int(byte, 2))
+
+    return messagedef decode_lsb(image_path):
+    # Load the image using Pillow
+    image = Image.open(image_path)
+
+    # Convert the image to a numpy array for ease of manipulation
+    image_array = np.array(image)
+
+    # Extract the least significant bit from each color channel of each pixel to reconstruct the binary message
+    binary_message = ''
+    for i in range(image_array.shape[0]):
+        for j in range(image_array.shape[1]):
+            for k in range(image_array.shape[2]):
+                binary_message += str(image_array[i, j, k] & 1)
+
+    # Find the index of the null character in the binary message
+    null_index = binary_message.find('00000000')
+
+    # Retrieve the binary message before the null character
+    message_binary = binary_message[:null_index]
+
+    # Split the binary message into 8-bit chunks and convert each chunk to a character using the chr function
+    message = ''
+    for i in range(0, len(message_binary), 8):
+        byte = message_binary[i:i+8]
+        message += chr(int(byte, 2))
+
+    return message
+
     # Split the binary message into 8-bit chunks and convert each chunk to a character using the chr function
     message = ''
     for i in range(0, len(binary_message), 8):
