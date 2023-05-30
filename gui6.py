@@ -1,11 +1,8 @@
-
-
 from pathlib import Path
 import tkinter as tk
-from global_variables import selected_image
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, filedialog
 import subprocess
-
+from global_variables import selected_image
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame6")

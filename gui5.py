@@ -1,7 +1,6 @@
 
 from pathlib import Path
 import tkinter as tk
-from global_variables import selected_image
 
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, filedialog
 import subprocess
@@ -38,6 +37,19 @@ def open_file_dialog():
         entry_1.delete(0, tk.END)  # Clear the current text in the Entry widget
         entry_1.insert(0, selected_image)  # Insert the selected file path into the Entry widget
 
+#decryption
+def decrypt(encrypted_message, key):
+    decrypted_message = ""
+    for char in encrypted_message:
+        if char.isalpha():
+            if char.isupper():
+                decrypted_char = chr((ord(char) - ord('A') - key) % 26 + ord('A'))
+            else:
+                decrypted_char = chr((ord(char) - ord('a') - key) % 26 + ord('a'))
+            decrypted_message += decrypted_char
+        else:
+            decrypted_message += char
+    return decrypted_message
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -114,6 +126,27 @@ entry_1.place(
     height=35.0
 )
 
+entry_image_2 = PhotoImage(
+    file=relative_to_assets("entry_1.png"))
+entry_bg_2 = canvas.create_image(
+    431.0,
+    225.5,
+    image=entry_image_2
+)
+entry_2 = Entry(
+    bd=0,
+    bg="#224957",
+    fg="#FFFFFF",
+    highlightthickness=0
+)
+key = entry_2.get()
+entry_2.place(
+    x=308.0,
+    y=210.0,
+    width=246.0,
+    height=35.0
+)
+
 """image_image_2 = PhotoImage(
     file=relative_to_assets("image_2.png"))
 image_2 = canvas.create_image(
@@ -145,6 +178,15 @@ canvas.create_text(
     font=("Poppins Regular", 12 * -1)
 )
 
+canvas.create_text(
+    355.0,
+    188.0,
+    anchor="nw",
+    text="Enter the Encryption code :",
+    fill="#FFFFFF",
+    font=("Poppins Regular", 12 * -1)
+)
+
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
 button_1 = Button(
@@ -172,7 +214,7 @@ button_2 = Button(
 )
 button_2.place(
     x=358.0,
-    y=193.0,
+    y=255.0,
     width=71.0,
     height=23.0
 )
@@ -188,7 +230,7 @@ button_3 = Button(
 )
 button_3.place(
     x=434.0,
-    y=193.0,
+    y=255.0,
     width=71.0,
     height=23.0
 )

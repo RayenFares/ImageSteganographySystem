@@ -12,10 +12,7 @@ import string
 import numpy as np
 
 
-def encode_lsb(image_path, message):
-    # Load the image using Pillow
-    image = Image.open(image_path)
-
+def encode_lsb(image, message):
     # Convert the image to a numpy array for ease of manipulation
     image_array = np.array(image)
 

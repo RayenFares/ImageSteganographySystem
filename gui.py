@@ -81,6 +81,7 @@ for user in users:
     print("Username:", username)
     print("Password:", password)
     print()
+
 #delete all of the users
 cursor.execute("DELETE FROM users")
 connection.commit()

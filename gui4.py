@@ -1,11 +1,8 @@
-
-
 from pathlib import Path
 import tkinter as tk
-from global_variables import selected_image
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, filedialog
 import subprocess
-
+selected_image = None
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame4")
 
@@ -36,14 +33,41 @@ def open_afterenc_interface():
 def handle_enter(event):
     entry_1.insert(tk.END, "\n")  # Insert a newline character when Enter is pressed
 
+from PIL import Image
 def open_file_dialog():
-    global selected_image
     file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
     if file_path:
-        selected_image = file_path
+        selected_image= Image.open(file_path)
         entry_3.delete(0, tk.END)  # Clear the current text in the Entry widget
-        entry_3.insert(0, selected_image)  # Insert the selected file path into the Entry widget
+        entry_3.insert(0, file_path)  # Insert the selected file path into the Entry widget
 
+# Encryption function (for message encryption)
+def encrypt(message, key):
+    encrypted_message = ""
+    for char in message:
+        if char.isalpha():
+            if char.isupper():
+                encrypted_char = chr((ord(char) - ord('A') + key) % 26 + ord('A'))
+            else:
+                encrypted_char = chr((ord(char) - ord('a') + key) % 26 + ord('a'))
+            encrypted_message += encrypted_char
+        else:
+            encrypted_message += char
+    return encrypted_message
+
+# Decryption function (for message decryption)
+def decrypt(encrypted_message, key):
+    decrypted_message = ""
+    for char in encrypted_message:
+        if char.isalpha():
+            if char.isupper():
+                decrypted_char = chr((ord(char) - ord('A') - key) % 26 + ord('A'))
+            else:
+                decrypted_char = chr((ord(char) - ord('a') - key) % 26 + ord('a'))
+            decrypted_message += decrypted_char
+        else:
+            decrypted_message += char
+    return decrypted_message
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -145,6 +169,7 @@ entry_2 = Entry(
     fg="#FFFFFF",
     highlightthickness=0
 )
+
 entry_2.place(
     x=308.0,
     y=268.0,
@@ -171,6 +196,24 @@ entry_3.place(
     width=246.0,
     height=29.0
 )
+
+#encryption of the message
+message = entry_1.get()
+key = entry_2.get()
+encrypted_message = encrypt(message, key)
+
+'''
+#encryption using LSB algorithm
+type(selected_image)
+photo = Image.open(str(selected_image))
+from steganography_functions import encode_lsb
+encode_lsb(photo,encrypted_message)
+'''
+from steganography_functions import encode_lsb
+def encode_photo():
+    if selected_image is not None:
+        # Perform encoding using the selected photo
+        encoded_image = encode_lsb(selected_image,encrypted_message)
 
 """image_image_2 = PhotoImage(
     file=relative_to_assets("image_2.png"))
