@@ -35,19 +35,23 @@ def authenticate():
     username = entry_1.get()
     password = entry_2.get()
 
-    hashed_password = bcrypt.hashpw ( password.encode (), bcrypt.gensalt () )
     canvas.itemconfig(error_text, text="")  # Clear previous error messages
     entry_1.delete(0, tk.END)
     entry_2.delete(0, tk.END)
 
     # Query the database to check if the credentials are correct
-    cursor.execute("SELECT COUNT(*) FROM users WHERE username=? AND password=?", (username, hashed_password))
+    cursor.execute("SELECT password FROM users WHERE username=?", (username,))
     result = cursor.fetchone()
-    count = result[0]
 
-    if count > 0:
-        # Authentication successful, open the home page
-        open_home_interface()
+    if result:
+        hashed_password = result[0]
+        # Check if the entered password matches the stored hashed password
+        if bcrypt.checkpw ( password.encode(), hashed_password ) :
+            # Authentication successful, open the home page
+            open_home_interface()
+        else:
+            # Authentication failed, show an error message
+            canvas.itemconfig ( error_text, text = "Incorrect username or password" )
     else:
         # Authentication failed, show an error message
         canvas.itemconfig(error_text, text="Incorrect username or password")
