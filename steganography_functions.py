@@ -25,6 +25,12 @@ def encode_lsb(image_path, message):
     # Check if the message can fit within the image
     if len(binary_message) > image_array.size * 3:
         raise ValueError('Message too large to encode in image')
+        
+    # Resize the image if necessary
+    if len(binary_message) > image_array.size:
+        width = int(np.ceil(len(binary_message) / image_array.shape[1]))
+        resized_image = image.resize((width, image_array.shape[1]))
+        image_array = np.array(resized_image)
 
     # Iterate through the image pixel by pixel, encoding the message into the least significant bit of each color channel
     binary_message_index = 0
