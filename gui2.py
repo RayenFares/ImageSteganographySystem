@@ -46,7 +46,7 @@ def register():
         return
 
     # Check if the password contains only alphanumeric characters and symbols
-    if not re.match ( r'^[a-zA-Z0-9\S]+$', password ) :
+    if not match ( r'^[a-zA-Z0-9\S]+$', password ) :
         canvas.itemconfig ( error_text, text = "Password should be composed of alphanumeric and other symbols." )
         return
 
