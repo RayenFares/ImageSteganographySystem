@@ -49,27 +49,15 @@ def encrypt(message, key):
     for char in message:
         if char.isalpha():
             if char.isupper():
-                encrypted_char = chr((ord(char) - ord('A') + key) % 26 + ord('A'))
+                encrypted_char = chr((ord(char) - ord('A') + int(key)) % 26 + ord('A'))
             else:
-                encrypted_char = chr((ord(char) - ord('a') + key) % 26 + ord('a'))
+                encrypted_char = chr((ord(char) - ord('a') + int(key)) % 26 + ord('a'))
             encrypted_message += encrypted_char
         else:
             encrypted_message += char
     return encrypted_message
 
 # Decryption function (for message decryption)
-def decrypt(encrypted_message, key):
-    decrypted_message = ""
-    for char in encrypted_message:
-        if char.isalpha():
-            if char.isupper():
-                decrypted_char = chr((ord(char) - ord('A') - key) % 26 + ord('A'))
-            else:
-                decrypted_char = chr((ord(char) - ord('a') - key) % 26 + ord('a'))
-            decrypted_message += decrypted_char
-        else:
-            decrypted_message += char
-    return decrypted_message
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -208,6 +196,9 @@ global encoded_image
 from steganography_functions import encode_lsb
 def encode_photo():
     if selected_image is not None:
+        message = entry_1.get()
+        key = entry_2.get()
+        encrypted_message = encrypt(message, key)
         global encoded_image
         # Perform encoding using the selected photo
         encoded_image = encode_lsb(selected_image,encrypted_message)
