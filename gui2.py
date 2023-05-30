@@ -5,6 +5,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess
 import sqlite3
 import bcrypt
+import re
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -46,7 +47,7 @@ def register():
         return
 
     # Check if the password contains only alphanumeric characters and symbols
-    if not match ( r'^[a-zA-Z0-9\S]+$', password ) :
+    if not re.match ( r'^[a-zA-Z0-9\S]+$', password ) :
         canvas.itemconfig ( error_text, text = "Password should be composed of alphanumeric and other symbols." )
         return
 
