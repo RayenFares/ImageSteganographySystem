@@ -21,6 +21,12 @@ def open_encoding_interface():
     subprocess.Popen(["python", "gui4.py"])
     window.destroy()  # Close the current interface
 
+def open_home_interface():
+    window.withdraw()  # Hide the current interface
+    # ... Save any necessary data ...
+    subprocess.Popen(["python", "gui3.py"])
+    window.destroy()  # Close the current interface
+
 def open_decoding_interface():
     window.withdraw()  # Hide the current interface
     # ... Save any necessary data ...
@@ -235,7 +241,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=open_login_interface,
+    command=open_home_interface,
     relief="flat"
 )
 button_1.place(

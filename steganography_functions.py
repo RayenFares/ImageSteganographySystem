@@ -54,11 +54,9 @@ def encode_lsb(image, message):
 
 
 def decode_lsb(image_path):
-    # Load the image using Pillow
-    image = Image.open(image_path)
 
     # Convert the image to a numpy array for ease of manipulation
-    image_array = np.array(image)
+    image_array = np.array(image_path)
 
     # Extract the least significant bit from each color channel of each pixel to reconstruct the binary message
     binary_message = ''
