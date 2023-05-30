@@ -10,7 +10,7 @@ Original file is located at
 from PIL import Image
 import string
 import numpy as np
-
+import os
 
 def encode_lsb(image, message):
     # Convert the image to a numpy array for ease of manipulation
@@ -45,7 +45,12 @@ def encode_lsb(image, message):
 
     # Convert the numpy array back to a Pillow image and save it
     encoded_image = Image.fromarray(image_array)
-    return encoded_image
+    if encoded_image is not None:
+        desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
+        # Save the encoded image on the desktop
+        encoded_image_path = os.path.join(desktop_path, 'encoded_image.png')
+        encoded_image.save(encoded_image_path)
+        print("Encoded image saved successfully.")
 
 
 def decode_lsb(image_path):

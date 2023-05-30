@@ -25,7 +25,7 @@ def open_decoding_interface():
     # ... Save any necessary data ...
     subprocess.Popen(["python", "gui5.py"])
     window.destroy()  # Close the current interface
-
+image= None
 def save_image():
     file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG Files", "*.png")])
     if file_path:
@@ -94,8 +94,27 @@ canvas.create_rectangle(
     326.0,
     fill="",
     outline="")
-image = PhotoImage(file=selected_image)
-canvas.create_image(479.0, 148.0, anchor="nw", image=image)
+def display_encoded_image(encoded_image):
+    # Create a Tkinter window
+    window = tk.Toplevel()
+    global encoded_image_photo
+    # Create a Tkinter PhotoImage from the encoded image
+    encoded_image_photo = ImageTk.PhotoImage(encoded_image)
+
+    # Create a Tkinter Label to display the image
+    label = tk.Label(window, image=encoded_image_photo)
+    label.pack()
+
+    # Run the Tkinter event loop
+    window.mainloop()
+
+from PIL import ImageTk, Image
+from gui4 import encoded_image
+photo = ImageTk.PhotoImage(encoded_image)
+label.configure(image=photo)
+label.image = photo
+#display_encoded_image(encoded_image)
+
 
 canvas.create_text(
     196.0,

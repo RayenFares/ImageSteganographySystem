@@ -2,7 +2,8 @@ from pathlib import Path
 import tkinter as tk
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, filedialog
 import subprocess
-selected_image = None
+
+global selected_image
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame4")
 
@@ -36,6 +37,7 @@ def handle_enter(event):
 from PIL import Image
 def open_file_dialog():
     file_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
+    global selected_image
     if file_path:
         selected_image= Image.open(file_path)
         entry_3.delete(0, tk.END)  # Clear the current text in the Entry widget
@@ -202,21 +204,17 @@ message = entry_1.get()
 key = entry_2.get()
 encrypted_message = encrypt(message, key)
 
-'''
-#encryption using LSB algorithm
-type(selected_image)
-photo = Image.open(str(selected_image))
-from steganography_functions import encode_lsb
-encode_lsb(photo,encrypted_message)
-'''
+global encoded_image
 from steganography_functions import encode_lsb
 def encode_photo():
     if selected_image is not None:
+        global encoded_image
         # Perform encoding using the selected photo
         encoded_image = encode_lsb(selected_image,encrypted_message)
 
+
 """image_image_2 = PhotoImage(
-    file=relative_to_assets("image_2.png"))
+    file=relative_to_assets("image_2.png")) 
 image_2 = canvas.create_image(
     5410.0,
     344.0,
@@ -269,7 +267,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=open_afterenc_interface,
+    command=encode_photo,
     relief="flat"
 )
 button_1.place(
