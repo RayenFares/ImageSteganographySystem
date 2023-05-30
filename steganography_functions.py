@@ -45,7 +45,7 @@ def encode_lsb(image, message):
 
     # Convert the numpy array back to a Pillow image and save it
     encoded_image = Image.fromarray(image_array)
-    encoded_image.save('encoded_image.png')
+    return encoded_image
 
 
 def decode_lsb(image_path):
