@@ -15,19 +15,22 @@ import os
 def encode_lsb(image, message):
     # Convert the image to a numpy array for ease of manipulation
     image_array = np.array(image)
-
     # Flatten the message into a binary string
     binary_message = ''.join(format(ord(i), '08b') for i in message)
 
     # Check if the message can fit within the image
     if len(binary_message) > image_array.size * 3:
         raise ValueError('Message too large to encode in image')
-        
+    # Calculate the required width to maintain the aspect ratio while accommodating the message
+    required_width = int(np.ceil(len(binary_message) / (image_array.shape[1] * image_array.shape[2])))
+
     # Resize the image if necessary
-    if len(binary_message) > image_array.size:
-        width = int(np.ceil(len(binary_message) / image_array.shape[1]))
-        resized_image = image.resize((width, image_array.shape[1]))
+    if required_width > image_array.shape[0]:
+        aspect_ratio = image_array.shape[1] / image_array.shape[0]
+        new_height = int(np.ceil(required_width / aspect_ratio))
+        resized_image = image.resize((required_width, new_height))
         image_array = np.array(resized_image)
+
 
     # Iterate through the image pixel by pixel, encoding the message into the least significant bit of each color channel
     binary_message_index = 0
@@ -49,8 +52,9 @@ def encode_lsb(image, message):
         desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
         # Save the encoded image on the desktop
         encoded_image_path = os.path.join(desktop_path, 'encoded_image.png')
-        encoded_image.save(encoded_image_path)
         print("Encoded image saved successfully.")
+        encoded_image.save(encoded_image_path)
+
 
 
 def decode_lsb(image_path):

@@ -7,6 +7,22 @@ import tkinter as tk
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 import subprocess
 
+window = Tk()
+window.title("StegaX")
+window.geometry("862x519")
+window.configure(bg = "#093545")
+
+
+canvas = Canvas(
+    window,
+    bg = "#093545",
+    height = 519,
+    width = 862,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
+)
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame3")
 
@@ -32,21 +48,7 @@ def open_decoding_interface():
     subprocess.Popen(["python", "gui5.py"])
     window.destroy()  # Close the current interface
 
-window = Tk()
 
-window.geometry("862x519")
-window.configure(bg = "#093545")
-
-
-canvas = Canvas(
-    window,
-    bg = "#093545",
-    height = 519,
-    width = 862,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
 
 canvas.place(x = 0, y = 0)
 image_image_1 = PhotoImage(

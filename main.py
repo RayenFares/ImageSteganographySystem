@@ -1,15 +1,13 @@
-# Import necessary modules and functions from other files
-from gui import *
-from gui2 import *
-from gui3 import *
-from gui4 import *
-from gui5 import *
-from steganography_functions import *
+from gui2 import show_register_interface
+from gui import show_login_interface
+from gui3 import show_home_interface
+from gui4 import show_encoding_interface
+from gui5 import show_decoding_interface
 
-
-
-def main():
-    # Your application code goes here
-    # Initialize any necessary components or variables
-    # Call functions from other files as needed
-    register()
+if __name__ == "__main__":
+    # Call the functions to show the interfaces
+    show_register_interface()
+    show_login_interface()
+    show_home_interface()
+    show_encoding_interface()
+    show_decoding_interface()

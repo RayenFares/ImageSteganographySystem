@@ -8,6 +8,21 @@ import subprocess
 import sqlite3
 import bcrypt
 
+window = tk.Tk()
+window.title("StegaX")
+window.geometry("862x519")
+window.configure(bg = "#093545")
+
+
+canvas = Canvas(
+    window,
+    bg = "#093545",
+    height = 519,
+    width = 862,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
+)
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame0")
@@ -56,21 +71,7 @@ def authenticate():
         # Authentication failed, show an error message
         canvas.itemconfig(error_text, text="Incorrect username or password")
 
-window = tk.Tk()
 
-window.geometry("862x519")
-window.configure(bg = "#093545")
-
-
-canvas = Canvas(
-    window,
-    bg = "#093545",
-    height = 519,
-    width = 862,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
 
 '''
 # Retrieve the users and their passwords from the database

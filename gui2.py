@@ -8,6 +8,22 @@ import bcrypt
 import re
 
 
+window = tk.Tk()
+window.title("StegaX")
+window.geometry("862x519")
+window.configure(bg = "#093545")
+
+
+canvas = Canvas(
+    window,
+    bg = "#093545",
+    height = 519,
+    width = 862,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
+)
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame2")
 #database creation
@@ -74,21 +90,7 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 
-window = tk.Tk()
 
-window.geometry("862x519")
-window.configure(bg = "#093545")
-
-
-canvas = Canvas(
-    window,
-    bg = "#093545",
-    height = 519,
-    width = 862,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
 
 canvas.place(x = 0, y = 0)
 image_image_1 = PhotoImage(

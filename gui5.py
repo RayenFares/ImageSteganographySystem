@@ -6,6 +6,23 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, filedialog
 import subprocess
 from PIL import Image
 
+window = Tk()
+window.title("StegaX")
+window.geometry("862x519")
+window.configure(bg = "#093545")
+
+
+
+canvas = Canvas(
+    window,
+    bg = "#093545",
+    height = 519,
+    width = 862,
+    bd = 0,
+    highlightthickness = 0,
+    relief = "ridge"
+)
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\USER\PycharmProjects\StegaX\ImageSteganographySystem\assets\frame5")
 global selected
@@ -50,9 +67,9 @@ def decrypt(encrypted_message, key):
     for char in encrypted_message:
         if char.isalpha():
             if char.isupper():
-                decrypted_char = chr((ord(char) - ord('A') - int(key)) % 26 + ord('A'))
+                decrypted_char = chr((ord(char) - ord('A') - int(''.join(filter(str.isdigit, key)))) % 26 + ord('A'))
             else:
-                decrypted_char = chr((ord(char) - ord('a') - int(key)) % 26 + ord('a'))
+                decrypted_char = chr((ord(char) - ord('a') - int(''.join(filter(str.isdigit, key)))) % 26 + ord('a'))
             decrypted_message += decrypted_char
         else:
             decrypted_message += char
@@ -62,22 +79,7 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 
-window = Tk()
 
-window.geometry("862x519")
-window.configure(bg = "#093545")
-
-
-
-canvas = Canvas(
-    window,
-    bg = "#093545",
-    height = 519,
-    width = 862,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
 
 canvas.place(x = 0, y = 0)
 image_image_1 = PhotoImage(
