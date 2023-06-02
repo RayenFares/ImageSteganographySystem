@@ -42,7 +42,7 @@ StegaX offers a simple and user-friendly way to perform image steganography, mak
 1. Clone the repository:
 
 ```shell
-git clone [https://github.com/your-username/stegaX.git](https://github.com/RayenFares/ImageSteganographySystem)
+git clone [https://github.com/RayenFares/ImageSteganographySystem.git]
 ```
 
 ## Usage
