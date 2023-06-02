@@ -47,8 +47,6 @@ git clone [https://github.com/RayenFares/ImageSteganographySystem.git]
 
 ## Usage
 
-## Usage
-
 1. Run the GUI application: `gui2.py`
 2. Register to create an account
 3. Login with your username and password
@@ -68,5 +66,5 @@ git clone [https://github.com/RayenFares/ImageSteganographySystem.git]
     
 ## Acknowledgements
 
-The Image Steganography System (StegaX) was developed as part of a project for the Information Assurance and Security Course(IT 360) by Rayen Fares, Aziz Srairi, Imen Cherif, Takwa karaoud.
+The Image Steganography System (StegaX) was developed as part of a project for the Information Assurance and Security Course(IT 360) by Cherif Imen, Fares Rayen, Srari Mohamed Aziz, Karaoud Takwa.
 We would like to express our sincere gratitude to our professor, Manel Abdelkader, for her invaluable guidance, expertise, and unwavering support throughout the duration of the IT 360 Course. 
