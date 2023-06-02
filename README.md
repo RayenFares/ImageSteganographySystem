@@ -47,21 +47,24 @@ git clone [https://github.com/RayenFares/ImageSteganographySystem.git]
 
 ## Usage
 
-1- Run the GUI application: gui2.py
-2- Register to create an account
-3- Login with your username and password
-4- Choose the desired operation (encoding or decoding) from the main menu.
-  For encoding:
-    a. Enter the secret message to hide.
-    b. Provide an encryption key for message encryption.
-    c. Select the cover image (the image in which you want to hide the message).
-    d. Click the "Encode" button to generate the encoded image.
-    e. The image is saved on your desktop labled 'encoded_image'
-    f. Share the encoded_image + the encryption key in a secure communication channel with the receiver
-  For decoding:
-    a. Select the encoded image (the image that contains the hidden message 'encoded_image').
-    b. Enter the encryption key used during encoding.
-    c. Click the "Decode" button to retrieve the hidden message.
+## Usage
+
+1. Run the GUI application: `gui2.py`
+2. Register to create an account
+3. Login with your username and password
+4. Choose the desired operation (encoding or decoding) from the main menu.
+    - For encoding:
+        a. Enter the secret message to hide.
+        b. Provide an encryption key for message encryption.
+        c. Select the cover image (the image in which you want to hide the message).
+        d. Click the "Encode" button to generate the encoded image.
+        e. The image is saved on your desktop labeled 'encoded_image'
+        f. Share the `encoded_image` + the encryption key in a secure communication channel with the receiver
+    - For decoding:
+        a. Select the encoded image (the image that contains the hidden message `encoded_image`).
+        b. Enter the encryption key used during encoding.
+        c. Click the "Decode" button to retrieve the hidden message.
+
     
 ## Acknowledgements
 
