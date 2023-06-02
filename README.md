@@ -27,14 +27,14 @@ StegaX offers a simple and user-friendly way to perform image steganography, mak
 - bcrypt: A password-hashing library used for securely hashing and verifying passwords.
 
 ## Files
-- Project- Report.pdf           -- represents the final project report in pdf format
-- gui2.py                       -- represents the registration interface
-- gui.py                        -- represents the login interface 
-- gui3.py                       -- represents the home interface
-- gui4.py                       -- represents the encoding interface
-- gui5.py                       -- represents the decoding interface
-- assets                        -- represents the file that contains all assets needed (images)
-- steganography_functions.py    -- represents the functions of encoding decoding using LSB algorithm
+- `Project- Report.pdf`           -- represents the final project report in pdf format
+- `gui2.py`                       -- represents the registration interface
+- `gui.py`                        -- represents the login interface 
+- `gui3.py`                       -- represents the home interface
+- `gui4.py`                       -- represents the encoding interface
+- `gui5.py`                      -- represents the decoding interface
+- `assets`                        -- represents the file that contains all assets needed (images)
+- `steganography_functions.py`    -- represents the functions of encoding decoding using LSB algorithm
 
 
 ## Installation
@@ -57,7 +57,7 @@ git clone [https://github.com/RayenFares/ImageSteganographySystem.git]
         c. Select the cover image (the image in which you want to hide the message).
         d. Click the "Encode" button to generate the encoded image.
         e. The image is saved on your desktop labeled 'encoded_image'
-        f. Share the `encoded_image` + the encryption key in a secure communication channel with the receiver
+        f. Share the encoded_image + the encryption key in a secure communication channel with the receiver
     - For decoding:
         a. Select the encoded image (the image that contains the hidden message `encoded_image`).
         b. Enter the encryption key used during encoding.
